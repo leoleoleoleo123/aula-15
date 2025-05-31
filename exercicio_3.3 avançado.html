@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Login com Validação e Renderização Condicional</title>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script>
+    let estado = {
+      usuario: "",
+      senha: "",
+      logadoComSucesso: false,
+      mensagemErro: null
+    };
+
+    function onInputChange(event) {
+      const { name, value } = event.target;
+      estado = { ...estado, [name]: value };
+      render();
+    }
+
+    function onLoginClick() {
+      if (estado.usuario.trim() === "") {
+        estado = { ...estado, mensagemErro: "Por favor, digite seu usuário.", logadoComSucesso: false };
+      } else {
+        estado = { ...estado, mensagemErro: null, logadoComSucesso: true };
+      }
+      render();
+    }
+
+    function render() {
+      let html = "";
+
+      if (estado.logadoComSucesso && !estado.mensagemErro) {
+        html = `
+          <h2>Login bem-sucedido!</h2>
+          <p>Bem-vindo, ${estado.usuario}!</p>
+        `;
+      } else {
+        html = `
+          <h2>Formulário de Login</h2>
+          ${estado.mensagemErro && `<p style="color:red;">${estado.mensagemErro}</p>`}
+          <input type="text" name="usuario" placeholder="Usuário" value="${estado.usuario}" oninput="onInputChange(event)" />
+          <br/>
+          <input type="password" name="senha" placeholder="Senha" value="${estado.senha}" oninput="onInputChange(event)" />
+          <br/>
+          <button onclick="onLoginClick()">Entrar</button>
+          <p><strong>Debug:</strong> Usuário: ${estado.usuario}, Senha: ${estado.senha}</p>
+        `;
+      }
+
+      document.getElementById("app").innerHTML = html;
+    }
+
+    render();
+  </script>
+</body>
+</html>

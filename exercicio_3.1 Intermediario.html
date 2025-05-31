@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulário de Login Básico</title>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script>
+    let estado = {
+      usuario: "",
+      senha: ""
+    };
+
+    function onInputChange(event) {
+      const { name, value } = event.target;
+      estado = { ...estado, [name]: value };
+      render();
+    }
+
+    function render() {
+      document.getElementById("app").innerHTML = `
+        <h2>Formulário de Login</h2>
+        <input type="text" name="usuario" placeholder="Usuário" value="${estado.usuario}" oninput="onInputChange(event)" />
+        <br/>
+        <input type="password" name="senha" placeholder="Senha" value="${estado.senha}" oninput="onInputChange(event)" />
+        <br/>
+        <button onclick="void(0)">Entrar</button>
+        <p><strong>Debug:</strong> Usuário: ${estado.usuario}, Senha: ${estado.senha}</p>
+      `;
+    }
+
+    render();
+  </script>
+</body>
+</html>

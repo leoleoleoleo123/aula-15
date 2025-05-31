@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Toggle Texto</title>
+</head>
+<body>
+
+  <button id="toggleBtn">Mostrar Texto</button>
+  <p id="texto" style="display: none;">Este parágrafo aparece quando mostrarTexto é true.</p>
+
+  <script>
+    const btn = document.getElementById('toggleBtn');
+    const texto = document.getElementById('texto');
+    let mostrarTexto = false;
+
+    btn.addEventListener('click', () => {
+      mostrarTexto = !mostrarTexto;
+     
+      btn.textContent = mostrarTexto ? 'Ocultar Texto' : 'Mostrar Texto';
+
+      texto.style.display = mostrarTexto ? 'block' : 'none';
+    });
+  </script>
+
+</body>
+</html>
